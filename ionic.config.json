@@ -1,0 +1,7 @@
+{
+  "name": "iQuote",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
