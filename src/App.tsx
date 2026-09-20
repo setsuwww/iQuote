@@ -3,7 +3,6 @@ import { IonReactRouter } from "@ionic/react-router";
 import { Navigate, Route } from "react-router-dom";
 
 import Welcome from "./pages/Welcome";
-import Introduction from "./pages/Introduction";
 import Home from "./pages/Home";
 
 /* Core CSS required for Ionic components to work properly */
@@ -38,11 +37,6 @@ const App: React.FC = () => {
           <Route
             path="/welcome"
             element={<Welcome />}
-          />
-
-          <Route
-            path="/introduction"
-            element={<Introduction />}
           />
 
           <Route
