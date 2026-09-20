@@ -43,47 +43,24 @@ interface FormattingToolbarProps {
 
 type ColorMode = | "text" | "underline";
 
-const FormattingToolbar: React.FC<
-  FormattingToolbarProps
-> = ({
+const FormattingToolbar: React.FC<FormattingToolbarProps> = ({
   editorRef,
-  isBold,
-  isItalic,
-  isUnderline,
+  isBold, isItalic, isUnderline,
   font,
-  onToggleFormat,
-  onChangeFont,
-  setIsBold,
-  setIsItalic,
-  setIsUnderline,
+  onToggleFormat, onChangeFont,
+  setIsBold, setIsItalic, setIsUnderline,
   fonts,
 }) => {
-  const [
-    colorModalOpen,
-    setColorModalOpen,
-  ] = useState(false);
+  const [colorModalOpen, setColorModalOpen ] = useState(false);
+  const [colorMode, setColorMode ] = useState<ColorMode>("text");
 
-  const [
-    colorMode,
-    setColorMode,
-  ] = useState<ColorMode>("text");
-
-  const execCommand = (
-    command: string,
-    value?: string
-  ) => {
+  const execCommand = (command: string, value?: string) => {
     editorRef.current?.focus();
 
-    document.execCommand(
-      command,
-      false,
-      value
-    );
+    document.execCommand(command, false, value);
   };
 
-  const openColorPicker = (
-    mode: ColorMode
-  ) => {
+  const openColorPicker = (mode: ColorMode) => {
     /*
      * Simpan selection SEBELUM modal dibuka.
      *
@@ -97,9 +74,7 @@ const FormattingToolbar: React.FC<
     setColorModalOpen(true);
   };
 
-  const applyTextColor = (
-    color: string
-  ) => {
+  const applyTextColor = (color: string) => {
     editorRef.current?.focus();
 
     execCommand(
@@ -194,132 +169,49 @@ const FormattingToolbar: React.FC<
     applyUnderlineColor(color);
   };
 
-  const toolbarButtonClass = (
-    active: boolean
-  ) =>
-    `
-flex
-h - 9
-w - 9
-items - center
-justify - center
-rounded - full
-text - sm
-transition - all
-duration - 200
-active: scale - 90
-      ${
-    active
-        ? "bg-white/15 text-white shadow-sm"
-        : "text-gray-400 hover:bg-white/10 hover:text-white"
+  const toolbarButtonClass = (active: boolean) => `flex h-9 w-9 items-center justify-center !rounded-full text-sm transition-all duration-200 active:scale-90
+      ${active ? "bg-white/10 text-yellow-400 shadow-sm !border !border-white/20" : "text-gray-400 hover:bg-white/10 hover:text-white"
 }
 `;
 
   return (
     <>
-      <div
-        className="
-          sticky
-          top-4
-          z-20
-          mx-auto
-          flex
-          w-fit
-          max-w-full
-          items-center
-          gap-1
-          rounded-full
-          border-b
-          border-white/10
-          bg-white/5
-          p-1.5
-          shadow-2xl
-          shadow-black/30
-          ring
-          ring-white/20
-          backdrop-blur-xl
-          backdrop-saturate-150
-        "
-      >
+      <div className="sticky top-4 z-20 mx-auto flex w-full max-w-full items-center gap-1 rounded-full border-b border-white/20 bg-white/5 p-1.5 shadow-xl shadow-black/30 ring ring-white/20 backdrop-blur-xl">
 
-        {/* Bold */}
-        <button
-          type="button"
-          onMouseDown={(e) =>
-            e.preventDefault()
-          }
-          onClick={() =>
-            onToggleFormat(
-              "bold",
-              isBold,
-              setIsBold
-            )
-          }
-          className={toolbarButtonClass(
-            isBold
-          )}
+        <button type="button"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => onToggleFormat("bold", isBold, setIsBold)}
+          className={toolbarButtonClass(isBold)}
           aria-label="Bold"
         >
-          <FontAwesomeIcon
-            icon={faBold}
-          />
+          <FontAwesomeIcon icon={faBold}/>
         </button>
 
         {/* Italic */}
-        <button
-          type="button"
-          onMouseDown={(e) =>
-            e.preventDefault()
-          }
-          onClick={() =>
-            onToggleFormat(
-              "italic",
-              isItalic,
-              setIsItalic
-            )
-          }
-          className={toolbarButtonClass(
-            isItalic
-          )}
+        <button type="button"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => onToggleFormat("italic", isItalic, setIsItalic)}
+          className={toolbarButtonClass(isItalic)}
           aria-label="Italic"
         >
-          <FontAwesomeIcon
-            icon={faItalic}
-          />
+          <FontAwesomeIcon icon={faItalic}/>
         </button>
 
         {/* Underline */}
-        <button
-          type="button"
-          onMouseDown={(e) =>
-            e.preventDefault()
-          }
-          onClick={() =>
-            onToggleFormat(
-              "underline",
-              isUnderline,
-              setIsUnderline
-            )
-          }
-          className={toolbarButtonClass(
-            isUnderline
-          )}
+        <button type="button"
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={() => onToggleFormat("underline", isUnderline, setIsUnderline)}
+          className={toolbarButtonClass(isUnderline)}
           aria-label="Underline"
         >
-          <FontAwesomeIcon
-            icon={faUnderline}
-          />
+          <FontAwesomeIcon icon={faUnderline}/>
         </button>
 
         {/* Divider */}
         <div className="mx-1 h-5 w-px bg-white/10" />
 
         {/* Text Color */}
-        <button
-          type="button"
-          onMouseDown={(e) =>
-            e.preventDefault()
-          }
+        <button type="button" onMouseDown={(e) => e.preventDefault()}
           onClick={() =>
             openColorPicker(
               "text"
