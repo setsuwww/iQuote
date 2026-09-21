@@ -200,7 +200,7 @@ const Home: React.FC = () => {
 
             {/* Editor */}
             <IonCard
-              className={`m-0 overflow-hidden rounded-3xl border bg-[#0f1115] transition-all duration-300
+              className={`m-0 overflow-hidden !rounded-xl border bg-[#0f1115] transition-all duration-300
                 ${isFocused
                   ? "border-sky-500/40 shadow-2xl shadow-sky-500/10"
                   : "border-white/10 shadow-xl shadow-black/20"
